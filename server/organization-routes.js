@@ -1,19 +1,22 @@
 const organizationRepository = require('./database/organization-repository.js');
 
-function createOrganization(req, data) {
-  organizationRepository.create({
+async function createOrganization(req, res) {
+
+  const data = req.body;
+
+  const organization = await organizationRepository.create({
     name: data.name,
     userId: data.userId,
   });
 
   const result = {
-    name: data.name,
-    userId: data.userId,
+    name: organization.name,
+    id: organization.id,
   };
 
-  return req.send(result);
+  return res.send(result);
 }
 
 module.exports = {
-  createOrganization: { method: createOrganization, errorMessage: "Could not organization" },
+  createOrganization: { method: createOrganization, errorMessage: "Could not organization", url: "organization/create" },
 };

@@ -1,22 +1,23 @@
 const userRepository = require('./database/user-repository.js');
 
-function createUser(req, data) {
+async function createUser(req, res) {
+  const data = req.body;
 
-  console.log(req, data);
-
-  userRepository.create({
+  const user = await userRepository.create({
     name: data.name
   });
+
+  
 
   const result = {
     name: data.name
   };
 
-  return req.send(result);
+  return res.send(result);
 }
 
 module.exports = {
   createUser: {
-    method: createUser, errorMessage: "Could create user"
+    method: createUser, errorMessage: "Could create user", url: 'user/create'
   },
 };

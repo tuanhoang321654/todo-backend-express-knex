@@ -1,20 +1,23 @@
 const projectRepository = require('./database/project-repository.js');
 
-function createProject(req, data) {
-  projectRepository.create({
+async function createProject(req, res) {
+
+  const data = req.body;
+
+  const project = await projectRepository.create({
     name: data.name,
     userId: data.organizationId,
     userId: data.userId,
   });
 
   const result = {
-    name: data.name,
-    userId: data.userId,
+    name: project.name,
+    id: project.id,
   };
 
   return req.send(result);
 }
 
 module.exports = {
-  createProject: { method: createProject, errorMessage: "Could not project" },
+  createProject: { method: createProject, errorMessage: "Could not project", url: "project/create" },
 };

@@ -27,8 +27,8 @@ const toExport = {
   ...locationRoute,
 }
 
-for (const route in toExport) {
-  toExport[route] = addErrorReporting(toExport[route].method, toExport[route].errorMessage);
-}
+// for (const route in toExport) {
+//   toExport[route] = addErrorReporting(toExport[route].method, toExport[route].errorMessage);
+// }
 
 module.exports = toExport;

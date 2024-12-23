@@ -10,7 +10,7 @@ async function get(tableName, id) {
     return results[0];
 }
 
-async function create(tableName, ...properties) {
+async function create(tableName, properties) {
     const results = await knex(tableName).insert({ ...properties }).returning('*');
     return results[0];
 }

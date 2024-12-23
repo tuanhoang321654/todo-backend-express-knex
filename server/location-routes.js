@@ -1,24 +1,21 @@
 const locationRepository = require('./database/location-repository.js');
 
-function createLocation(req, data) {
-  const protocol = req.protocol,
-    host = req.get('host');
+async function createLocation(req, res) {
 
-  locationRepository.create({
+  const data = req.body;
+
+  const location = await locationRepository.create({
     name: data.name,
     userId: data.organizationId,
     userId: data.userId,
   });
 
   const result = {
-    name: data.name,
-    userId: data.userId,
-    projectId: data.projectId,
-    locationId: data.locationId,
-    url: `${protocol}://${host}/location/create`
+    name: location.name,
+    id: location.id,
   };
 
-  return req.send(result);
+  return res.send(result);
 }
 
 module.exports = {
