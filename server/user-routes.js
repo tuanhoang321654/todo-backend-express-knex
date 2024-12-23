@@ -8,10 +8,12 @@ function createUser(req, data) {
     name: data.name
   });
 
-  return {
+  const result = {
     name: data.name,
     url: `${protocol}://${host}/user/create`
   };
+
+  return req.send(result);
 }
 
 module.exports = {
