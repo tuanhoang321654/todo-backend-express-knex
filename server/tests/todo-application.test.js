@@ -63,8 +63,7 @@ describe(`Todo-Backend API residing at http://localhost:${process.env.PORT}`, ()
 
             console.log('task --> ', taskAfterTheMove);
 
-
-            expec(taskAfterTheMove.locationId, doingLocation.id);
+            expect(taskAfterTheMove.locationId).toBe(doingLocation.id);
 
 
         });
