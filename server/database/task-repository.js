@@ -1,5 +1,7 @@
 const repositoryBase = require('./repository-base.js');
 
+const tableName = 'task';
+
 module.exports = {
     all: function () { repositoryBase.all(tableName) },
     get: function (id) { repositoryBase.get(tableName, id) },

@@ -54,7 +54,7 @@ function unassignTask(req, data) {
     userId: 0,
   });
 
-  const req = {
+  const result = {
     name: task.name,
     taskId: task.Id,
   };

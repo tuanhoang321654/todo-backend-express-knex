@@ -1,6 +1,9 @@
 const userRepository = require('./database/user-repository.js');
 
 function createUser(req, data) {
+
+  console.log(req, data);
+
   userRepository.create({
     name: data.name
   });
@@ -13,7 +16,7 @@ function createUser(req, data) {
 }
 
 module.exports = {
-  createUser: {    
+  createUser: {
     method: createUser, errorMessage: "Could create user"
   },
 };
