@@ -2,6 +2,7 @@ const _ = require('lodash');
 
 const userRoute = require('./user-routes.js');
 const organizationRoute = require('./organization-routes.js');
+const projectRoute = require('./project-routes.js');
 
 const todos = require('./database/todo-queries.js');
 
@@ -64,6 +65,7 @@ function addErrorReporting(func, message) {
 const toExport = {
   ...userRoute,
   ...organizationRoute,
+  ...projectRoute,
   getAllTodos: { method: getAllTodos, errorMessage: "Could not fetch all todos" },
   getTodo: { method: getTodo, errorMessage: "Could not fetch todo" },
   postTodo: { method: postTodo, errorMessage: "Could not post todo" },
