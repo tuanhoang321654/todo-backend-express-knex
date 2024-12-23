@@ -7,10 +7,9 @@ async function createUser(req, res) {
     name: data.name
   });
 
-  
-
   const result = {
-    name: data.name
+    name: user.name,
+    id: user.id,
   };
 
   return res.send(result);

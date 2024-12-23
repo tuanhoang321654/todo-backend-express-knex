@@ -6,8 +6,7 @@ async function createLocation(req, res) {
 
   const location = await locationRepository.create({
     name: data.name,
-    userId: data.organizationId,
-    userId: data.userId,
+    userId: data.projectId,
   });
 
   const result = {

@@ -1,41 +1,48 @@
 const taskRepository = require('./database/task-repository.js');
 
-function createTask(req, data) {
+async function createTask(req, res) {
 
-  taskRepository.create({
-    name: data.name,
-    userId: data.organizationId,
-    userId: data.userId,
-  });
+  const data = req.body;
 
-  return {
+  const task = await taskRepository.create({
     name: data.name,
-    userId: data.userId,
     projectId: data.projectId,
-    locationId: data.locationId,
-  };
-}
-
-function moveTask(req, data) {
-
-  const task = taskRepository.update({
-    name: data.name,
-    locationId: data.locationId,
+    userId: data.userId,
   });
 
   const result = {
     name: task.name,
     userId: task.userId,
+    projectId: task.projectId,
     locationId: task.locationId,
   };
 
-  return req.send(result);
+  return res.send(result);
 }
 
-function assignTask(req, data) {
+async function moveTask(req, res) {
 
-  const task = taskRepository.update({
-    name: data.name,
+  const data = req.body;
+
+  const task = await taskRepository.update(data.id, {
+    locationId: data.locationId,
+  });
+
+  const result = {
+    name: task.name,
+    userId: task.userId,
+    projectId: task.projectId,
+    locationId: task.locationId,
+  };
+
+  return res.send(result);
+}
+
+async function assignTask(req, res) {
+
+  const data = req.body;
+
+  const task = await taskRepository.update(data.id, {
     userId: data.userId,
   });
 
@@ -43,23 +50,29 @@ function assignTask(req, data) {
   const result = {
     name: task.name,
     userId: task.userId,
+    projectId: task.projectId,
+    locationId: task.locationId,
   };
 
-  return req.send(result);
+  return res.send(result);
 }
 
-function unassignTask(req, data) {
-  const task = taskRepository.update({
-    name: data.name,
-    userId: 0,
+async function unassignTask(req, res) {
+
+  const data = req.body;
+
+  const task = await taskRepository.update(data.id, {
+    userId: 0
   });
 
   const result = {
     name: task.name,
-    taskId: task.Id,
+    userId: task.userId,
+    projectId: task.projectId,
+    locationId: task.locationId,
   };
 
-  return req.send(result);
+  return res.send(result);
 }
 
 module.exports = {
