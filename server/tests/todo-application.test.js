@@ -12,6 +12,7 @@ const url = require('url');
 const knex = require("../database/connection.js");
 
 const request = require('./util/httpRequests.js');
+const { exec } = require("child_process");
 
 // Relative paths are used for supertest in the util file.
 const getBody = response => response.body;
@@ -61,6 +62,9 @@ describe(`Todo-Backend API residing at http://localhost:${process.env.PORT}`, ()
             const taskAfterTheMove = getBody(await request.post('/api/task/move', { id: task.id, locationId: doingLocation.id }));
 
             console.log('task --> ', taskAfterTheMove);
+
+
+            expec(taskAfterTheMove.locationId, doingLocation.id);
 
 
         });

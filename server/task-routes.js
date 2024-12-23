@@ -12,6 +12,7 @@ async function createTask(req, res) {
   });
 
   const result = {
+    id: task.id,
     name: task.name,
     userId: task.userId,
     projectId: task.projectId,
