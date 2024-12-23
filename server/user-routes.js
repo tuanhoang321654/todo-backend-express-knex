@@ -3,6 +3,8 @@ const userRepository = require('./database/user-repository.js');
 async function createUser(req, res) {
   const data = req.body;
 
+  console.log(data, '<-- user');
+
   const user = await userRepository.create({
     name: data.name
   });

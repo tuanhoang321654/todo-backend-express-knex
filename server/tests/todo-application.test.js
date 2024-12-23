@@ -32,16 +32,38 @@ describe(`Todo-Backend API residing at http://localhost:${process.env.PORT}`, ()
             await cleanupDb();
         });
 
-        it("create user correctly", async () => {
+        it("create user, then orgranization, then project, then task, then assign atask", async () => {
 
-            const user = { name: "new user" };
+            const user = getBody(await request.post('/api/user/create', { name: "new user" }));
 
-            var postResult = await request.post('/user/create', user);
+            console.log('user --> ', user);
 
-            console.log(postResult);
+            const organization = getBody(await request.post('/api/organization/create', { userId: user.id, name: 'new org' }));
+
+            console.log('organization --> ', organization);
+
+            const project = getBody(await request.post('/api/project/create', { userId: user.id, organizationId: organization.id, name: 'new project' }));
+
+            console.log('project --> ', project);
+
+            const todoLocation = getBody(await request.post('/api/location/create', { projectId: project.id, name: 'todo' }));
+
+            console.log('todoLocation --> ', todoLocation);
+
+            const doingLocation = getBody(await request.post('/api/location/create', { projectId: project.id, name: 'doing' }));
+
+            console.log('doingLocation --> ', doingLocation);
+
+            const task = getBody(await request.post('/api/task/create', { userId: user.id, projectId: project.id, locationId: todoLocation.id, name: 'task 1' }));
+
+            console.log('task --> ', task);
+
+            const taskAfterTheMove = getBody(await request.post('/api/task/move', { id: task.id, locationId: doingLocation.id }));
+
+            console.log('task --> ', taskAfterTheMove);
 
 
         });
-    });    
+    });
 
 });

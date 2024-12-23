@@ -15,7 +15,7 @@ async function createProject(req, res) {
     id: project.id,
   };
 
-  return req.send(result);
+  return res.send(result);
 }
 
 module.exports = {

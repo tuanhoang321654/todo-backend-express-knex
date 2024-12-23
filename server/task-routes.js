@@ -8,6 +8,7 @@ async function createTask(req, res) {
     name: data.name,
     projectId: data.projectId,
     userId: data.userId,
+    locationId: data.locationId,
   });
 
   const result = {

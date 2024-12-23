@@ -16,7 +16,12 @@ async function create(tableName, properties) {
 }
 
 async function update(tableName, id, properties) {
-    const results = await knex(tableName).where({ id }).update({ ...properties }).returning('*');
+
+    const record = await knex(tableName).where({ id }).first();
+
+    console.log('---> record', record);
+
+    const results = await knex(tableName).where({ id }).update({ ...record, ...properties }).returning('*');
     return results[0];
 }
 
