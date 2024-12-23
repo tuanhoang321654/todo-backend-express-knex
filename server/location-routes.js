@@ -10,13 +10,15 @@ function createLocation(req, data) {
     userId: data.userId,
   });
 
-  return {
+  const result = {
     name: data.name,
     userId: data.userId,
     projectId: data.projectId,
     locationId: data.locationId,
     url: `${protocol}://${host}/task/create`
   };
+
+  return req.send(result);
 }
 
 module.exports = {

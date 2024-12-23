@@ -9,11 +9,13 @@ function createOrganization(req, data) {
     userId: data.userId,
   });
 
-  return {
+  const result = {
     name: data.name,
     userId: data.userId,
     url: `${protocol}://${host}/organization/create`
   };
+
+  return req.send(result);
 }
 
 module.exports = {

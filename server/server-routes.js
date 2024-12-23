@@ -6,8 +6,6 @@ const projectRoute = require('./project-routes.js');
 const taskRoute = require('./task-routes.js');
 const locationRoute = require('./location-routes.js');
 
-const todos = require('./database/todo-queries.js');
-
 function createUser(req, data) {
   const protocol = req.protocol,
     host = req.get('host'),

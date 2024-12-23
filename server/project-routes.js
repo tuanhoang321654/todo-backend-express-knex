@@ -10,11 +10,13 @@ function createProject(req, data) {
     userId: data.userId,
   });
 
-  return {
+  const result =  {
     name: data.name,
     userId: data.userId,
     url: `${protocol}://${host}/project/create`
   };
+
+  return req.send(result);
 }
 
 module.exports = {

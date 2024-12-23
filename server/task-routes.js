@@ -28,12 +28,14 @@ function moveTask(req, data) {
     locationId: data.locationId,
   });
 
-  return {
+  const result = {
     name: task.name,
     userId: task.userId,
     locationId: task.locationId,
     url: `${protocol}://${host}/task/move`
   };
+
+  return req.send(result);
 }
 
 function assignTask(req, data) {
@@ -44,6 +46,9 @@ function assignTask(req, data) {
     name: data.name,
     userId: data.userId,
   });
+
+
+  return req.send(result);
 
   return {
     name: task.name,
