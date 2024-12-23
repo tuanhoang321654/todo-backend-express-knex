@@ -18,5 +18,5 @@ function createProject(req, data) {
 }
 
 module.exports = {
-  createProject: { method: createProject, errorMessage: "Could not organization" },
+  createProject: { method: createProject, errorMessage: "Could not project" },
 };
