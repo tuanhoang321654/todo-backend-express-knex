@@ -1,6 +1,6 @@
 const taskRepository = require('./database/task-repository.js');
 
-function updateTask(req, data) {
+function createTask(req, data) {
   const protocol = req.protocol,
     host = req.get('host');
 
@@ -19,7 +19,7 @@ function updateTask(req, data) {
   };
 }
 
-function updateMove(req, data) {
+function moveTask(req, data) {
   const protocol = req.protocol,
     host = req.get('host');
 
@@ -36,7 +36,7 @@ function updateMove(req, data) {
   };
 }
 
-function assign(req, data) {
+function assignTask(req, data) {
   const protocol = req.protocol,
     host = req.get('host');
 
@@ -52,7 +52,7 @@ function assign(req, data) {
   };
 }
 
-function unassign(req, data) {
+function unassignTask(req, data) {
   const protocol = req.protocol,
     host = req.get('host');
 
@@ -69,8 +69,8 @@ function unassign(req, data) {
 }
 
 module.exports = {
-  createProject: { method: updateTask, errorMessage: "Could not create task" },
-  updateMove: { method: updateMove, errorMessage: "Could not move task" },
-  assign: { method: assign, errorMessage: "Could not assign task" },
-  unassign: { method: unassign, errorMessage: "Could not assign task" },
+  createTask: { method: createTask, errorMessage: "Could not create task" },
+  moveTask: { method: moveTask, errorMessage: "Could not move task" },
+  assignTask: { method: assignTask, errorMessage: "Could not assign task" },
+  unassignTask: { method: unassignTask, errorMessage: "Could not unassign task" },
 };

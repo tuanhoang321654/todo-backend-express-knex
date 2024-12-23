@@ -4,6 +4,7 @@ const userRoute = require('./user-routes.js');
 const organizationRoute = require('./organization-routes.js');
 const projectRoute = require('./project-routes.js');
 const taskRoute = require('./task-routes.js');
+const locationRoute = require('./location-routes.js');
 
 const todos = require('./database/todo-queries.js');
 
@@ -67,7 +68,8 @@ const toExport = {
   ...userRoute,
   ...organizationRoute,
   ...projectRoute,
-  ...taskRoute,  
+  ...taskRoute,
+  ...locationRoute,
   getAllTodos: { method: getAllTodos, errorMessage: "Could not fetch all todos" },
   getTodo: { method: getTodo, errorMessage: "Could not fetch todo" },
   postTodo: { method: postTodo, errorMessage: "Could not post todo" },
