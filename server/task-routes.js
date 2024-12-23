@@ -1,8 +1,6 @@
 const taskRepository = require('./database/task-repository.js');
 
 function createTask(req, data) {
-  const protocol = req.protocol,
-    host = req.get('host');
 
   taskRepository.create({
     name: data.name,
@@ -15,13 +13,10 @@ function createTask(req, data) {
     userId: data.userId,
     projectId: data.projectId,
     locationId: data.locationId,
-    url: `${protocol}://${host}/task/create`
   };
 }
 
 function moveTask(req, data) {
-  const protocol = req.protocol,
-    host = req.get('host');
 
   const task = taskRepository.update({
     name: data.name,
@@ -32,15 +27,12 @@ function moveTask(req, data) {
     name: task.name,
     userId: task.userId,
     locationId: task.locationId,
-    url: `${protocol}://${host}/task/move`
   };
 
   return req.send(result);
 }
 
 function assignTask(req, data) {
-  const protocol = req.protocol,
-    host = req.get('host');
 
   const task = taskRepository.update({
     name: data.name,
@@ -48,34 +40,31 @@ function assignTask(req, data) {
   });
 
 
-  return req.send(result);
-
-  return {
+  const result = {
     name: task.name,
     userId: task.userId,
-    url: `${protocol}://${host}/task/assign`
   };
+
+  return req.send(result);
 }
 
 function unassignTask(req, data) {
-  const protocol = req.protocol,
-    host = req.get('host');
-
   const task = taskRepository.update({
     name: data.name,
     userId: 0,
   });
 
-  return {
+  const req = {
     name: task.name,
     taskId: task.Id,
-    url: `${protocol}://${host}/task/unassign`
   };
+
+  return req.send(result);
 }
 
 module.exports = {
-  createTask: { method: createTask, errorMessage: "Could not create task" },
-  moveTask: { method: moveTask, errorMessage: "Could not move task" },
-  assignTask: { method: assignTask, errorMessage: "Could not assign task" },
-  unassignTask: { method: unassignTask, errorMessage: "Could not unassign task" },
+  createTask: { method: createTask, errorMessage: "Could not create task", url: 'task/create' },
+  moveTask: { method: moveTask, errorMessage: "Could not move task", url: 'task/move' },
+  assignTask: { method: assignTask, errorMessage: "Could not assign task", url: 'task/assign' },
+  unassignTask: { method: unassignTask, errorMessage: "Could not unassign task", url: 'task/unassign' },
 };

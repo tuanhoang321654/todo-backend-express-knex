@@ -15,12 +15,12 @@ function createLocation(req, data) {
     userId: data.userId,
     projectId: data.projectId,
     locationId: data.locationId,
-    url: `${protocol}://${host}/task/create`
+    url: `${protocol}://${host}/location/create`
   };
 
   return req.send(result);
 }
 
 module.exports = {
-  createProject: { method: createLocation, errorMessage: "Could not create location" },
+  createLocation: { method: createLocation, errorMessage: "Could not create location", url: 'location/create' },
 };
